@@ -23,33 +23,6 @@ cat("R-squared for Set 3:", set_3$r.squared, "\n")
 cat("R-squared for Set 4:", set_4$r.squared, "\n")
 
 
-# Set up the 2x2 plot layout
-par(mfrow=c(2, 2), mar=c(5.1, 4.1, 4.1, 2.1))
-
-# Plot Set I
-with(anscombe, plot(x1, y1, xlim=c(2, 20), ylim=c(2, 14), pch=19,
-                    col= "blue", cex=1.5, las=1, xlab="x1", ylab="y1"))
-title("Set I")
-
-# Plot Set II
-with(anscombe, plot(x2, y2, xlim=c(2, 20), ylim=c(2, 14), pch=19,
-                    col="blue", cex=1.5, las=1, xlab="x2", ylab="y2"))
-title("Set II")
-
-# Plot Set III
-with(anscombe, plot(x3, y3, xlim=c(2, 20), ylim=c(2, 14), pch=19,
-                    col="blue", cex=1.5, las=1, xlab="x3", ylab="y3"))
-title("Set III")
-
-# Plot Set IV
-with(anscombe, plot(x4, y4, xlim=c(2, 20), ylim=c(2, 14), pch=19,
-                    col="blue", cex=1.5, las=1, xlab="x4", ylab="y4"))
-title("Set IV")
-
-# Reset to default layout
-par(mfrow=c(1, 1), mar=c(5.1, 4.1, 4.1, 2.1))
-
-
 # Record the end time
 end_time <- Sys.time()
 
