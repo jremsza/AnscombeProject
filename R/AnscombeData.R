@@ -1,4 +1,5 @@
-start_time <- Sys.time()
+library(rbenchmark)
+
 
 anscombe <- data.frame(
   x1 = c(10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5),
@@ -10,22 +11,29 @@ anscombe <- data.frame(
   y3 = c(7.46, 6.77, 12.74, 7.11, 7.81, 8.84, 6.08, 5.39, 8.15, 6.42, 5.73),
   y4 = c(6.58, 5.76, 7.71, 8.84, 8.47, 7.04, 5.25, 12.5, 5.56, 7.91, 6.89))
 
-# show results from four regression analyses
-set_1 <- with(anscombe, print(summary(lm(y1 ~ x1, data = anscombe))))
-set_2 <- with(anscombe, print(summary(lm(y2 ~ x2, data = anscombe))))
-set_3 <- with(anscombe, print(summary(lm(y3 ~ x3, data = anscombe))))
-set_4 <- with(anscombe, print(summary(lm(y4 ~ x4, data = anscombe))))
+# Perform regression analyses
+set_1 <- lm(y1 ~ x1, data = anscombe)
+set_2 <- lm(y2 ~ x2, data = anscombe)
+set_3 <- lm(y3 ~ x3, data = anscombe)
+set_4 <- lm(y4 ~ x4, data = anscombe)
 
-# Extract and print the R-squared values
-cat("R-squared for Set 1:", set_1$r.squared, "\n")
-cat("R-squared for Set 2:", set_2$r.squared, "\n")
-cat("R-squared for Set 3:", set_3$r.squared, "\n")
-cat("R-squared for Set 4:", set_4$r.squared, "\n")
+# Benchmark the analyses
+benchmark(
+  "set1" = { summary(set_1) },
+  "set2" = { summary(set_2) },
+  "set3" = { summary(set_3) },
+  "set4" = { summary(set_4) },
+  replications = 1000,
+  columns = c("test", "replications", "elapsed", "user.self")
+)
 
+# Extract and print the R-squared values and summaries
+cat("R-squared for Set 1:", summary(set_1)$r.squared, "\n")
+cat("R-squared for Set 2:", summary(set_2)$r.squared, "\n")
+cat("R-squared for Set 3:", summary(set_3)$r.squared, "\n")
+cat("R-squared for Set 4:", summary(set_4)$r.squared, "\n")
 
-# Record the end time
-end_time <- Sys.time()
-
-# Calculate and print the elapsed time
-elapsed_time <- end_time - start_time
-cat("Total execution time:", elapsed_time, "\n")
+print(summary(set_1))
+print(summary(set_2))
+print(summary(set_3))
+print(summary(set_4))
