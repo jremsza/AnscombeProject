@@ -6,5 +6,6 @@ Taking the previous data into consideration it becomes clear that Go, in compari
 
 In conclusion, Python and R offer simplistic and streamlined statistical analysis frameworks that can produce detailed reports on the dataset of interest. For that reason, it is not my recommendation to move forward with Go exclusively within the company. Go can be used for statistical programming, however another package may be worth considering given the amount of time taken reworking Go code to try to achieve the same result seen with Python and R on the Anscombe dataset. If time is not a constraint, getting the data scientists up to speed using statistics with Go is feasible but code necessary to produce the desired result will increse with the current stats package of interest.
 
-Python and R Code objtain from:
+Python and R Code obtained from:
+
 Miller, Thomas W. Modeling techniques in predictive analytics with python and R: A guide to data science. Upper Saddle River, NJ: Pearson Education, 2015. 
