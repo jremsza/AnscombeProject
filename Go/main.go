@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	// Retrieve the Anscombe dataset
+	// Retrieve the dataset
 	anscombeData := data.AnscombeData()
 
 	// Iterate over the dataset
@@ -36,7 +36,7 @@ func main() {
 		}
 		rSquared := correlation * correlation
 
-		// Manual calculation of linear regression
+		// Manual calculation of linear regression to compare with package result
 		meanX, err := stats.Mean(dataSet.X)
 		if err != nil {
 			fmt.Printf("Error in calculating mean of X for %s: %v\n", setName, err)
@@ -52,6 +52,7 @@ func main() {
 			sumNum += (dataSet.X[i] - meanX) * (dataSet.Y[i] - meanY)
 			sumDenom += (dataSet.X[i] - meanX) * (dataSet.X[i] - meanX)
 		}
+		// Calculate slope and intercept
 		manSlope := sumNum / sumDenom
 		manIntercept := meanY - manSlope*meanX
 
