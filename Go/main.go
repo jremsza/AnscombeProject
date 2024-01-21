@@ -26,7 +26,7 @@ func main() {
 		}
 
 		// intercept and slope from the Coordinates
-		intercept, slope := regression[0], regression[1]
+		intercept, slope := regression[0].X, regression[1].Y
 
 		// Calculate correlation and R squared
 		correlation, err := stats.Correlation(dataSet.X, dataSet.Y)
@@ -36,27 +36,6 @@ func main() {
 		}
 		rSquared := correlation * correlation
 
-		// Manual calculation of linear regression to compare with package result
-		meanX, err := stats.Mean(dataSet.X)
-		if err != nil {
-			fmt.Printf("Error in calculating mean of X for %s: %v\n", setName, err)
-			continue
-		}
-		meanY, err := stats.Mean(dataSet.Y)
-		if err != nil {
-			fmt.Printf("Error in calculating mean of Y for %s: %v\n", setName, err)
-			continue
-		}
-		var sumNum, sumDenom float64
-		for i := range dataSet.X {
-			sumNum += (dataSet.X[i] - meanX) * (dataSet.Y[i] - meanY)
-			sumDenom += (dataSet.X[i] - meanX) * (dataSet.X[i] - meanX)
-		}
-		// Calculate slope and intercept
-		manSlope := sumNum / sumDenom
-		manIntercept := meanY - manSlope*meanX
-
-		fmt.Printf("%s - Manual Linear Regression: y = %.2fx + %.2f\n", setName, manSlope, manIntercept)
 		fmt.Printf("%s - Linear Regression from package: y = %.2fx + %.2f, R squared: %.2f\n", setName, slope, intercept, rSquared)
 	}
 }
